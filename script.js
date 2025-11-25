@@ -5,10 +5,12 @@ class PasteTracker {
         this.loadFromStorage();
         this.bindEvents();
         this.updateUI();
+        this.updatePasteButtonState(); // Initialize paste button state
     }
 
     initElements() {
         this.pasteInput = document.getElementById('pasteInput');
+        this.pasteBtn = document.getElementById('pasteBtn');
         this.copyAllBtn = document.getElementById('copyAllBtn');
         this.pasteCount = document.getElementById('pasteCount');
         this.pastesList = document.getElementById('pastesList');
@@ -29,6 +31,14 @@ class PasteTracker {
             }
         });
 
+        // Handle input changes to enable/disable paste button
+        this.pasteInput.addEventListener('input', () => {
+            this.updatePasteButtonState();
+        });
+
+        // Paste button
+        this.pasteBtn.addEventListener('click', () => this.handlePaste());
+
         // Copy all button
         this.copyAllBtn.addEventListener('click', () => this.copyAll());
 
@@ -48,7 +58,13 @@ class PasteTracker {
         if (content) {
             this.addPaste(content);
             this.pasteInput.value = ''; // Clear the input
+            this.updatePasteButtonState(); // Update button state after clearing
         }
+    }
+
+    updatePasteButtonState() {
+        const content = this.pasteInput.value.trim();
+        this.pasteBtn.disabled = !content;
     }
 
     addPaste(content) {
@@ -74,10 +90,8 @@ class PasteTracker {
     copyAll() {
         if (this.pastes.length === 0) return;
 
-        const allContent = this.pastes.map((paste, index) => {
-            const timestamp = this.formatTimestamp(paste.timestamp);
-            return `[${index + 1}] ${paste.content}\nAdded: ${timestamp}\n`;
-        }).join('\n' + '-'.repeat(50) + '\n\n');
+        // Only include the paste content, separated by newlines
+        const allContent = this.pastes.map(paste => paste.content).join('\n');
 
         navigator.clipboard.writeText(allContent).then(() => {
             this.showToast(`Copied ${this.pastes.length} pastes to clipboard!`);
