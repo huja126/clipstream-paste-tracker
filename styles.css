@@ -87,6 +87,12 @@ header {
 }
 
 /* Buttons */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 .btn-primary {
     display: flex;
     align-items: center;
@@ -117,6 +123,42 @@ header {
 
 .btn-primary:disabled {
     background: #6B7280;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 16px;
+    background: #FFFFFF;
+    color: #007AFF;
+    border: 1px solid #007AFF;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    cursor: pointer;
+    transition: all 250ms ease-out;
+    text-decoration: none;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #E5F2FF;
+    transform: translateY(-2px);
+}
+
+.btn-secondary:active:not(:disabled) {
+    transform: translateY(0px) scale(0.98);
+}
+
+.btn-secondary:disabled {
+    background: #F3F4F6;
+    color: #6B7280;
+    border-color: #9CA3AF;
     cursor: not-allowed;
     transform: none;
 }
@@ -309,8 +351,14 @@ header {
         align-items: stretch;
     }
     
-    .btn-primary {
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
         justify-content: center;
+        width: 100%;
     }
     
     .paste-item {
