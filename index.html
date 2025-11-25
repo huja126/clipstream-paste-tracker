@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipstream - Paste Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="app-title">Clipstream</h1>
+            <p class="app-subtitle">Track and manage all your copy-paste operations</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-container">
+                    <textarea 
+                        id="pasteInput" 
+                        placeholder="Paste your text or link here..."
+                        rows="4"
+                        maxlength="5000"
+                    ></textarea>
+                </div>
+                <div class="input-actions">
+                    <button id="copyAllBtn" class="btn-primary" disabled>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy All
+                    </button>
+                    <div class="paste-counter">
+                        <span id="pasteCount">0</span> pastes
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pastes List Section -->
+            <section class="pastes-section">
+                <h2 class="section-title">Recent Pastes</h2>
+                <div id="pastesList" class="pastes-list">
+                    <div class="empty-state" id="emptyState">
+                        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <p>No pastes yet</p>
+                        <p class="empty-subtitle">Start pasting text or links above</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
